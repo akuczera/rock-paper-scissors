@@ -1,3 +1,6 @@
+
+function game() {
+
 //Created array of options for 'computer' to select.
 var options = [
   'rock',
@@ -7,35 +10,51 @@ var options = [
 
 //Function that creates an integer between 0-2 and then returns corresponding option from array.
 function computerPlay() {
-  let randomPick = options[Math.floor(Math.random() * options.length)];
+  randomPick = options[Math.floor(Math.random() * options.length)];
   return randomPick;
 }
 
-//Asking 'player' to type in a choice.
-let playerSelection = window.prompt("What do you choose? Rock, Paper, or Scissors?");
-playerSelection = playerSelection.toLowerCase();
+let randompick;
+let computerCount = 0;
+let playerCount = 0;
+let playerSelection;
+let computerSelection;
 
-//Assigning computerPlay() function to new variable.
-let computerSelection = computerPlay();
-
-//Creates one round of game, decides who the winner is based on string comparison.
 function playRound(param1, param2) {
   if ((param1 === "rock") && (param2 === "scissors")) {
-    alert("Computer wins! Rock crushes scissors."); 
+    computerCount++; 
   } else if ((param1 === "scissors") && (param2 === "rock")) {
-    alert("You win! Rock crushes scissors");
+    playerCount++;
   } else if ((param1 === "scissors") && (param2 === "paper")) {
-    alert("Computer wins! Scissors cut through paper.");
+    computerCount++;
   } else if ((param1 === "paper") && (param2 === "scissors")) {
-    alert("You win! Scissors cut through paper.");
+    playerCount++;
   } else if ((param1 === "paper") && (param2 === "rock")) {
-    alert("Computer wins! Paper covers rock.");
+    computerCount++;
   } else if ((param1 === "rock") && (param2 === "paper")) {
-    alert("You win! Paper covers rock.");
+    playerCount++;
   } else {
-    alert("It's a tie!");
   }
 }
 
-//Run the game with variables we created earlier.
-playRound(computerSelection, playerSelection);
+  for (let i = 0; i < 5; i++) {
+    computerSelection = computerPlay();
+    playerSelection = window.prompt("What do you choose? Rock, Paper, or Scissors?");
+    playerSelection = playerSelection.toLowerCase();
+    
+    playRound(computerSelection, playerSelection);
+    
+    computerSelection.toUpperCase;
+    playerSelection.toUpperCase;
+
+    if (computerCount > playerCount) {
+      alert(`Computer chose ${computerSelection}, you chose ${playerSelection}. Computer wins this round. Computer: ${computerCount} Player: ${playerCount}`)
+    } else if (playerCount > computerCount) {
+      alert(`Computer chose ${computerSelection}, you chose ${playerSelection}. You win this round! Computer: ${computerCount} Player: ${playerCount}`)
+    } else {
+      alert(`Computer chose ${computerSelection}, you chose ${playerSelection}. This round is a tie. Computer: ${computerCount} Player: ${playerCount}`)
+    }
+  }
+}
+
+game();
