@@ -1,6 +1,6 @@
 
 //Created array of options for 'computer' to select.
-var options = [
+const options = [
   'rock',
   'paper',
   'scissors'
