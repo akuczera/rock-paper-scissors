@@ -27,26 +27,21 @@ btn.forEach(btn => btn.addEventListener('click', () => {
   playRound(computerSelection, playerSelection);
 }));
 
+//function to disable buttons
+function disableButtons() {
+  btn.forEach(btn => {
+    btn.disabled = true;
+  })
+}
+
 function playRound(param1, param2) {
   
   var element = document.getElementById("score");
 
-  if ((param1 === "rock") && (param2 === "scissors")) {
+  if ((param1 === "rock" && param2 === "scissors") || (param1 === "scissors" && param2 === "paper") || (param1 === "paper" && param2 === "rock")) {
     computerCount++;
     var text = `Computer chose ${computerSelection}, you chose ${playerSelection}. Computer wins this round.\n\nComputer: ${computerCount}\nPlayer: ${playerCount}`;
-  } else if ((param1 === "scissors") && (param2 === "rock")) {
-    playerCount++;
-    var text = `Computer chose ${computerSelection}, you chose ${playerSelection}. You win this round!\n\nComputer: ${computerCount}\nPlayer: ${playerCount}`;
-  } else if ((param1 === "scissors") && (param2 === "paper")) {
-    computerCount++;
-    var text = `Computer chose ${computerSelection}, you chose ${playerSelection}. Computer wins this round.\n\nComputer: ${computerCount}\nPlayer: ${playerCount}`;
-  } else if ((param1 === "paper") && (param2 === "scissors")) {
-    playerCount++;
-    var text = `Computer chose ${computerSelection}, you chose ${playerSelection}. You win this round!\n\nComputer: ${computerCount}\nPlayer: ${playerCount}`;
-  } else if ((param1 === "paper") && (param2 === "rock")) {
-    computerCount++;
-    var text = `Computer chose ${computerSelection}, you chose ${playerSelection}. Computer wins this round.\n\nComputer: ${computerCount}\nPlayer: ${playerCount}`;
-  } else if ((param1 === "rock") && (param2 === "paper")) {
+  } else if ((param1 === "scissors" && param2 === "rock") || (param1 === "paper" && param2 === "scissors") || (param1 === "rock" && param2 === "paper")) {
     playerCount++;
     var text = `Computer chose ${computerSelection}, you chose ${playerSelection}. You win this round!\n\nComputer: ${computerCount}\nPlayer: ${playerCount}`;
   } else {
@@ -56,21 +51,17 @@ function playRound(param1, param2) {
   element.innerText = text;
 
   if (computerCount == 5) {
+    disableButtons();
     var para = document.createElement("p");
-    var final = document.createTextNode("The computer has won this time! Choose again to start over.");
+    var final = document.createTextNode("The computer has won this time! Refresh the page to start over.");
     element.appendChild(para);
     para.appendChild(final);
-    computerCount = 0;
-    playerCount = 0;
-    return;
    } else if (playerCount == 5) {
+    disableButtons();
     var para = document.createElement("p");
-    var final = document.createTextNode("You win the game! Choose again to start over.");
+    var final = document.createTextNode("You win the game! Refresh the page to start over.");
     element.appendChild(para);
     para.appendChild(final);
-    computerCount = 0;
-    playerCount = 0;
-    return;
  }
 }
 
